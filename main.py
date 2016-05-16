@@ -13,12 +13,15 @@ while i <= int(lastElement):
     listNames = driver.find_elements_by_xpath("//div[@class='span9']//h3//a[not(@class)]")
     listAuthors = driver.find_elements_by_xpath("//div[@class='span9']//h3//small")
     i += 1
-    for element in listNames:
-        listNamesAll.append(element.text)
     for element in listAuthors:
         listAuthorsAll.append(element.text)
     for element in listNames:
         listUrlAll.append(element.get_attribute("href"))
+
+for element in listUrlAll:
+    driver.get(element)
+    name = driver.find_element_by_xpath("//div[@class='span9']//div[@class='page-header']//h1//span[not(@class)]").text
+    listNamesAll.append(name)
 
 for element in listNamesAll:
     print element
